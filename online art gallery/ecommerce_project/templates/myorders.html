@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders</title>
+    <!-- {%load static%}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"> -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://images.pexels.com/photos/1629236/pexels-photo-1629236.jpeg?auto=compress&cs=tinysrgb&w=600');
+            /* opacity:0.3; */
+            background-size: cover;
+            background-repeat: no-repeat;
+        }    
+        
+
+        .order {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            color: #fff7f7;
+        }
+        p{
+            color: white;
+        }
+        nav {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 10px;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+        }
+
+        nav ul li a:hover {
+            background-color: #575757;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>My Orders</h1>
+    <div >
+        {% if orders %}
+        {% for order in orders %}
+        <div class="order">
+            <h2>User: {{ request.user.username }}</h2>
+            <h3>Order ID: {{ order.id }}</h3>
+            <p>Total Amount: ${{ order.total_amount }}</p>
+            <!-- <p>Date Ordered: {{ order.date_ordered }}</p> -->
+            <!-- <h4>Products:</h4>
+            <ul>
+                {% for product in order.products.all %}
+                <li>{{ product.name }} - ${{ product.price }}</li>
+                {% endfor %}
+            </ul>
+            <h4>Payment Details:</h4>
+            <p>Payment Method: {{ order.payment.payment_method }}</p>
+            <p>Payment Date: {{ order.payment.payment_date }}</p>
+            <p>Payment Status: {{ order.payment.payment_status }}</p> -->
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>No orders found.</p>
+        {% endif %}
+    </div>
+</body>
+
+</html>

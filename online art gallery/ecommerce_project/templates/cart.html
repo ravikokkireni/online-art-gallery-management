@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <title>Your Cart</title>
+    <!-- {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"> -->
+    <style>
+        body{
+        background: url('https://images.pexels.com/photos/1629236/pexels-photo-1629236.jpeg?auto=compress&cs=tinysrgb&w=600');
+            /* opacity:0.3; */
+            background-size: cover;
+            background-repeat: no-repeat;
+        }    
+        nav {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo a {
+            color: white;
+            text-decoration: none;
+            font-size: 24px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 10px;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+        }
+
+        nav ul li a:hover {
+            background-color: #575757;
+        }
+        .cart-container {
+            background-color: aliceblue;
+            width: 50%;
+            margin:10px;
+            box-shadow: 0px 15px 20px rgba(0,0,0,0.1);
+            border-radius: 10px;
+           
+        }
+
+        .cart-container h1 {
+            padding: 10px;
+            color: rgb(34, 34, 34);
+            font-size: 30px;
+        }
+
+        .cart-container li {
+            color: rgb(40, 40, 40);
+            font-size: 20px;
+
+        }
+        .cart-container a{
+            margin-left: 40px;
+            
+        }
+    </style>
+
+</head>
+
+<body>
+    <nav>
+        <div class="logo">
+            <a href="#">Gallery</a>
+        </div>
+        <ul>
+            <li><a href="{% url 'home' %} ">Products</a></li>
+            <!-- <li><a href="{% url 'profile' %}"></a>Profile</li> -->
+        </ul>
+    </nav>
+    <div class="cart-container">
+        <h1>Your Cart</h1>
+        <ul>
+            {% for cart_product in cart.cartproduct_set.all %}
+            <li>
+                <h2>{{ cart_product.product.name }}</h2>
+                <p>Quantity: {{ cart_product.quantity }}</p>
+                <p>Price: {{ cart_product.product.price }}</p>
+                <form action="{% url 'remove_from_cart' cart_product.product.id %}" method="post">
+                    {% csrf_token %}
+            </li>
+            <button class="btn btn-primary" type="submit">Remove from Cart</button>
+            {% empty %}
+            <li>Your cart is empty.</li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'checkout' %}" >checkout here</a>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+"""
+URL configuration for ecommerce_project project.
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/5.0/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.contrib import admin
+from django.urls import path
+from shop import views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', views.main, name='main'),
+    path('register_user/', views.register_user, name='register_user'),
+    path('login_user/', views.login_user, name='login_user'),
+    path('register_artist/', views.register_artist, name='register_artist'),
+    path('artist_login/', views.artist_login, name='artist_login'),
+    path('add_product/', views.add_product, name='add_product'),
+    path('home/', views.home, name='home'),
+    path('cart/', views.cart, name='cart'),
+    path('video/', views.home, name='video'),
+    path('profile/', views.profile, name='profile'),
+    path('ordercon/', views.ordercon, name='ordercon'),
+    path('checkout/', views.checkout, name='checkout'),
+    path('purchase/', views.purchase, name='purchase'), 
+    # path('myorders/', views.my_orders, name='my_orders'),
+    # path('myorders/', views.my_orders, name='my_orders'),
+    path('myorders/', views.myorders, name='myorders'),
+
+    # path('ordercon/', views.OrderConfirmationView.as_view(), name='ordercon'),
+    path('add_to_cart/<int:product_id>/', views.add_to_cart, name='add_to_cart'),
+    path('remove_from_cart/<int:product_id>/', views.remove_from_cart, name='remove_from_cart'),
+    path('submit_review/<int:product_id>/', views.submit_review, name='submit_review'),
+    path('exhibitions/', views.exhibitions, name='exhibitions'), 
+    path('watch-video/<int:product_id>/', views.watch_video, name='watch_video'),
+]
+
+

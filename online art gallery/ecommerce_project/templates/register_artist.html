@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Register Artist</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+    <div class="form-container">
+        <h2>Register as an Artist</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Register</button>
+
+           <p> Already have account <a href="{% url 'artist_login' %}">Login here</a></p>
+
+        </form>
+    </div>
+</body>
+
+</html>
